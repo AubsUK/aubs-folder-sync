@@ -1,0 +1,15 @@
+[Unit]
+Description=aubs-folder-sync
+After=nginx.service
+Requires=nginx.service
+
+[Service]
+Type=simple
+WorkingDirectory=/usr/local/sbin/aubs-folder-sync/
+ExecStart=/usr/local/sbin/aubs-folder-sync/aubs-folder-sync.sh
+
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
