@@ -99,12 +99,12 @@ Configure root SSH Access from the primary server to all remote server(s)
         ```
 3. Copy the key to the remote server(s)
     ```
-    sudo ssh-copy-id -p 22122 aubs-folder-sync@192.168.1.233
+    sudo ssh-copy-id -p 22122 aubs-folder-sync@192.168.1.20
     ```
 
 4. Try and SSH to the remote server(s)
     ```
-    sudo ssh -p '22122' 'aubs-folder-sync@192.168.1.233'
+    sudo ssh -p '22122' 'aubs-folder-sync@192.168.1.20'
     ```
 5. If you've logged in successfully, log out back to the primary server
     ```
@@ -515,7 +515,7 @@ No testing elements yet
 |[Back to top](#aubs-folder-sync)|<br/><br/>
 1. What to do if unable to rsync or ssh - sleep/retry/fork process/continuous/email?
 2. rsync/ssh just directories that contain changes (may need to consider storing
-3. Split each server to have their own directory/port/user config (i.e. host port user /folder1/ /folder2, 192.168.1.233 22122 aubs-folder-sync /etc/nginx/, 192.168.1.234 22 aubs /etc/nginx/ /etc/pihole/)
+3. Split each server to have their own directory/port/user config (i.e. host port user /folder1/ /folder2, 192.168.1.20 22122 aubs-folder-sync /etc/nginx/, 192.168.1.30 22 aubs /etc/nginx/ /etc/pihole/)
 4. Check packages are installed (as per Packages used above)
 5. Email notification
 6. Testing options
@@ -538,13 +538,13 @@ Tue Aug 29 04:52:12 AM UTC 2023: All folders checked ok.
 Tue Aug 29 04:52:12 AM UTC 2023: Starting First Run
 Tue Aug 29 04:52:12 AM UTC 2023: --------------------------------------------------
 Tue Aug 29 04:52:12 AM UTC 2023: Sync Folders: '/etc/nginx/'
-Tue Aug 29 04:52:12 AM UTC 2023: Refresh Servers: '192.168.1.233'
+Tue Aug 29 04:52:12 AM UTC 2023: Refresh Servers: '192.168.1.20'
 Tue Aug 29 04:52:12 AM UTC 2023: Remote Commands: 'sudo service nginx restart'
 Tue Aug 29 04:52:12 AM UTC 2023: Remote User: 'aubs-folder-sync'
 Tue Aug 29 04:52:12 AM UTC 2023: Reason: (1) - 1 First Run validating sync
-Tue Aug 29 04:52:12 AM UTC 2023: Synchronising to 192.168.1.233
+Tue Aug 29 04:52:12 AM UTC 2023: Synchronising to 192.168.1.20
 Tue Aug 29 04:52:13 AM UTC 2023: Sync success.
-Tue Aug 29 04:52:13 AM UTC 2023: Running commands on server 192.168.1.233
+Tue Aug 29 04:52:13 AM UTC 2023: Running commands on server 192.168.1.20
 Tue Aug 29 04:52:14 AM UTC 2023: Commands completed.
 Tue Aug 29 04:52:14 AM UTC 2023: Done
 Tue Aug 29 04:52:14 AM UTC 2023: Synchronise complete.
@@ -561,13 +561,13 @@ Aug 29 04:52:13 proxy01 aubs-folder-sync.sh[125056]: total size is 25,556  speed
 ```
 Tue Aug 29 05:05:37 AM UTC 2023: --------------------------------------------------
 Tue Aug 29 05:05:37 AM UTC 2023: Sync Folders: '/etc/nginx/'
-Tue Aug 29 05:05:37 AM UTC 2023: Refresh Servers: '192.168.1.233'
+Tue Aug 29 05:05:37 AM UTC 2023: Refresh Servers: '192.168.1.20'
 Tue Aug 29 05:05:37 AM UTC 2023: Remote Commands: 'sudo service nginx restart'
 Tue Aug 29 05:05:37 AM UTC 2023: Remote User: 'aubs-folder-sync'
 Tue Aug 29 05:05:37 AM UTC 2023: Reason: (2) - 1 CREATE /etc/nginx/TEST-FILE01 2 CREATE /etc/nginx/TEST-FILE02
-Tue Aug 29 05:05:37 AM UTC 2023: Synchronising to 192.168.1.233
+Tue Aug 29 05:05:37 AM UTC 2023: Synchronising to 192.168.1.20
 Tue Aug 29 05:05:38 AM UTC 2023: Sync success.
-Tue Aug 29 05:05:38 AM UTC 2023: Running commands on server 192.168.1.233
+Tue Aug 29 05:05:38 AM UTC 2023: Running commands on server 192.168.1.20
 Tue Aug 29 05:05:39 AM UTC 2023: Commands completed.
 Tue Aug 29 05:05:39 AM UTC 2023: Done
 Tue Aug 29 05:05:39 AM UTC 2023: Synchronise complete.
@@ -585,13 +585,13 @@ Aug 29 05:05:38 proxy01 aubs-folder-sync.sh[125914]: total size is 25,556  speed
 ```
 Tue Aug 29 05:06:00 AM UTC 2023: --------------------------------------------------
 Tue Aug 29 05:06:00 AM UTC 2023: Sync Folders: '/etc/nginx/'
-Tue Aug 29 05:06:00 AM UTC 2023: Refresh Servers: '192.168.1.233'
+Tue Aug 29 05:06:00 AM UTC 2023: Refresh Servers: '192.168.1.20'
 Tue Aug 29 05:06:00 AM UTC 2023: Remote Commands: 'sudo service nginx restart'
 Tue Aug 29 05:06:00 AM UTC 2023: Remote User: 'aubs-folder-sync'
 Tue Aug 29 05:06:00 AM UTC 2023: Reason: (1) - 1 MODIFY /etc/nginx/TEST-FILE01
-Tue Aug 29 05:06:00 AM UTC 2023: Synchronising to 192.168.1.233
+Tue Aug 29 05:06:00 AM UTC 2023: Synchronising to 192.168.1.20
 Tue Aug 29 05:06:01 AM UTC 2023: Sync success.
-Tue Aug 29 05:06:01 AM UTC 2023: Running commands on server 192.168.1.233
+Tue Aug 29 05:06:01 AM UTC 2023: Running commands on server 192.168.1.20
 Tue Aug 29 05:06:02 AM UTC 2023: Commands completed.
 Tue Aug 29 05:06:02 AM UTC 2023: Done
 Tue Aug 29 05:06:02 AM UTC 2023: Synchronise complete.
@@ -607,25 +607,25 @@ Aug 29 05:06:01 proxy01 aubs-folder-sync.sh[125977]: total size is 25,568  speed
 ```
 Tue Aug 29 05:06:21 AM UTC 2023: --------------------------------------------------
 Tue Aug 29 05:06:21 AM UTC 2023: Sync Folders: '/etc/nginx/'
-Tue Aug 29 05:06:21 AM UTC 2023: Refresh Servers: '192.168.1.233'
+Tue Aug 29 05:06:21 AM UTC 2023: Refresh Servers: '192.168.1.20'
 Tue Aug 29 05:06:21 AM UTC 2023: Remote Commands: 'sudo service nginx restart'
 Tue Aug 29 05:06:21 AM UTC 2023: Remote User: 'aubs-folder-sync'
 Tue Aug 29 05:06:21 AM UTC 2023: Reason: (1) - 1 DELETE /etc/nginx/TEST-FILE01
-Tue Aug 29 05:06:21 AM UTC 2023: Synchronising to 192.168.1.233
+Tue Aug 29 05:06:21 AM UTC 2023: Synchronising to 192.168.1.20
 Tue Aug 29 05:06:22 AM UTC 2023: Sync success.
-Tue Aug 29 05:06:22 AM UTC 2023: Running commands on server 192.168.1.233
+Tue Aug 29 05:06:22 AM UTC 2023: Running commands on server 192.168.1.20
 Tue Aug 29 05:06:22 AM UTC 2023: Commands completed.
 Tue Aug 29 05:06:22 AM UTC 2023: Done
 Tue Aug 29 05:06:22 AM UTC 2023: Synchronise complete.
 Tue Aug 29 05:06:22 AM UTC 2023: --------------------------------------------------
 Tue Aug 29 05:06:22 AM UTC 2023: Sync Folders: '/etc/nginx/'
-Tue Aug 29 05:06:22 AM UTC 2023: Refresh Servers: '192.168.1.233'
+Tue Aug 29 05:06:22 AM UTC 2023: Refresh Servers: '192.168.1.20'
 Tue Aug 29 05:06:22 AM UTC 2023: Remote Commands: 'sudo service nginx restart'
 Tue Aug 29 05:06:22 AM UTC 2023: Remote User: 'aubs-folder-sync'
 Tue Aug 29 05:06:22 AM UTC 2023: Reason: (1) - 1 DELETE /etc/nginx/TEST-FILE02
-Tue Aug 29 05:06:22 AM UTC 2023: Synchronising to 192.168.1.233
+Tue Aug 29 05:06:22 AM UTC 2023: Synchronising to 192.168.1.20
 Tue Aug 29 05:06:23 AM UTC 2023: Sync success.
-Tue Aug 29 05:06:23 AM UTC 2023: Running commands on server 192.168.1.233
+Tue Aug 29 05:06:23 AM UTC 2023: Running commands on server 192.168.1.20
 Tue Aug 29 05:06:24 AM UTC 2023: Commands completed.
 Tue Aug 29 05:06:24 AM UTC 2023: Done
 Tue Aug 29 05:06:24 AM UTC 2023: Synchronise complete.
@@ -698,7 +698,7 @@ Container configuration is using the Debian_Bookworm_amd64_20230626_cloud_rootfs
         sudo systemctl status nginx
         ```
 
-    3. Make sure you can see the default page via IPv4 and IPv6 if appropriate  
+    3. Make sure you can see the default page via IPv4 and IPv6 if appropriate from the primary and secondary servers  
         [http://192.168.1.10](http://192.168.1.10) (substitute for your IPv4 IP)  
         [http://192.168.1.20](http://192.168.1.20) (substitute for your IPv4 IP)  
         [http://[2a01:4b00::10]/](http://[2a01:4b00::10]/) (substitute for your IPv6 IP)  
@@ -720,8 +720,8 @@ Container configuration is using the Debian_Bookworm_amd64_20230626_cloud_rootfs
         sudo apt install keepalived -y
         ```
     2. Choose an IP address that can be used as a virtual IP between the hosts  
-       192.168.1.30  
-       2a01:4b00::30  
+       192.168.1.50  
+       2a01:4b00::50  
     3. Configure keepalived on each server
         ```
         sudo nano /etc/keepalived/keepalived.conf
@@ -766,7 +766,7 @@ Container configuration is using the Debian_Bookworm_amd64_20230626_cloud_rootfs
           priority 120
           # The virtual ip address shared between the two loadbalancers
           virtual_ipaddress {
-            192.168.1.30
+            192.168.1.50
           }
           track_script {
             check_nginx
@@ -786,7 +786,7 @@ Container configuration is using the Debian_Bookworm_amd64_20230626_cloud_rootfs
           priority 120
           # The virtual ip address shared between the two loadbalancers
           virtual_ipaddress {
-            2a01:4b00::30/64
+            2a01:4b00::50/64
           }
           track_script {
             check_nginx
