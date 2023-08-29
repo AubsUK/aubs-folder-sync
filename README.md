@@ -184,6 +184,19 @@ Configure root SSH Access from the primary server to all remote server(s)
         ```
         sudo follow -f /var/log/aubs-folder-sync
         ```
+    3. On the remote server(s) watch one folder being sync'd
+       ```
+       sudo watch ls -al /etc/nginx/
+       ```
+    4. On the Primary server, create/delete/modify
+       ```
+       sudo touch /etc/nginx/TEST-FILE01
+       sudo touch /etc/nginx/TEST-FILE02
+       sudo echo "test1" > /etc/nginx/TEST-FILE01
+       sudo echo "test2" > /etc/nginx/TEST-FILE02
+       sudo rm /etc/nginx/TEST-FILE01
+       sudo rm /etc/nginx/TEST-FILE02
+       ```
 
 
 <br/><br/>
