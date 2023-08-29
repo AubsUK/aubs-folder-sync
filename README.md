@@ -20,7 +20,8 @@
 
 # Information
 |[Back to top](#aubs-folder-sync)|<br/><br/>
-This is a simple script that monitors folders for changes and (almost) instantly synchronises it with another server.
+This is a simple script which monitors folders for changes and (almost) instantly synchronises it with other servers.
+It was born primarily through the need for a mechanism to synchronise configuration files between multiple servers used as failover Nginx reverse proxies.
 - Runs automatically as a service (systemd)
 - Allows monitoring and syncing of multiple folders
 - Allows excluding certain files/folders (by regex)
@@ -480,13 +481,14 @@ No testing elements yet
 
 # Planned changes (in no particular order)
 |[Back to top](#aubs-folder-sync)|<br/><br/>
-1. What to do if unable to rsync or ssh - sleep/retry/fork process/email?
+1. What to do if unable to rsync or ssh - sleep/retry/fork process/continuous/email?
 2. rsync/ssh just directories that contain changes (may need to consider storing
 3. Split each server to have their own directory/port/user config (i.e. host port user /folder1/ /folder2, 192.168.1.233 22122 aubs-folder-sync /etc/nginx/, 192.168.1.234 22 aubs /etc/nginx/ /etc/pihole/)
 4. Check packages are installed (as per Packages used above)
 5. Email notification
 6. Testing options
-7. 
+7. Running on multiple servers to sync between each other both ways (notes --delete would need to be removed because on startup could delete on remote before remote retries)
+8. 
 
 <br/><br/>
 
@@ -537,4 +539,4 @@ That's it, everything has been removed.
 
 # Notes
 |[Back to top](#aubs-folder-sync)|<br/><br/>
-This script was born through the need for a mechanism to synchronise the configuration between multiple servers used as failover Nginx reverse proxies.  I took a lot of inspiration from many support sites including [Stack Overflow](https://stackoverflow.com/) and related sites.
+Inspiration taken from many support sites including [Stack Overflow](https://stackoverflow.com/).
