@@ -99,12 +99,12 @@ Configure root SSH Access from the primary server to all remote server(s)
         ```
 3. Copy the key to the remote server(s)
     ```
-    sudo ssh-copy-id -p 22122 aubs-folder-sync@192.168.1.20
+    sudo ssh-copy-id -p 22 aubs-folder-sync@192.168.1.20
     ```
 
 4. Try and SSH to the remote server(s)
     ```
-    sudo ssh -p '22122' 'aubs-folder-sync@192.168.1.20'
+    sudo ssh -p '22' 'aubs-folder-sync@192.168.1.20'
     ```
 5. If you've logged in successfully, log out back to the primary server
     ```
