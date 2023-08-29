@@ -32,12 +32,13 @@ It was born primarily through the need for a mechanism to synchronise configurat
 # Prerequisites
 |[Back to top](#aubs-folder-sync)|<br/><br/>
 There are a few prerequisites, but they should be relatively simple.
-* Firstly, on all remote server(s), you need to create a service account, give it sudo access, limit passwordless sudo to specific commands, allow it to log in via password.
-* Secondly, on the primary server, you need to pass its root account public key to each of the remote server(s).
-* Thirdly, on all remote server(s) you need to remove its ability to log in with a password and lock the service account password.
-* Finally, on all remote server(s) install rsync.
+* First: on all remote server(s), create a service account, give it sudo access, limit passwordless sudo to specific commands, allow it to log in via password.
+* Second: on the primary server, pass its root account public key to each of the remote server(s).
+* Third: on the primary server, install rsync.
+* Fourth: on all remote server(s) remove the service account ability to log in with a password and lock the password.
+* Fifth: on all remote server(s) install rsync.
 
-### On the remote server(s)
+## On the remote server(s)
 
 1. Create a new user account with a temporary password (we'll remove it later)
     ```
@@ -78,7 +79,7 @@ There are a few prerequisites, but they should be relatively simple.
     ```
 7. Repeat all the steps in items 1-6 on each of the 'remote' servers.
 
-### On the primary server
+## On the primary server
 
 Configure root SSH Access from the primary server to all remote server(s)
 1. Check if an RSA key already exists
@@ -109,8 +110,12 @@ Configure root SSH Access from the primary server to all remote server(s)
     exit
     ```
 6. Repeat steps 1-5 on the primary server for each of the 'remote' servers (Note: Step 2 should only ever need to be done once, if it doesn't already exist).
+7. Install rsync
+    ```
+    sudo apt install rsync
+    ```
 
-### On the remote server(s)
+## On the remote server(s)
 
 1. Remove aubs-folder-sync from login
     ```
