@@ -13,6 +13,7 @@
 [Planned changes](#planned-changes-in-no-particular-order)<br/>
 [Example outputs](#example-outputs)<br/>
 [Removal](#removal)<br/>
+[Nginx and KeepAlive installation](#Nginx-and-KeepAlive-installation)<br/>
 [Notes](#notes)<br/>
 
 <br/><br/>
@@ -680,6 +681,155 @@ If you installed the script using the prerequisites and quick start guide, it's 
 That's it, everything has been removed.
 
 <br/><br/>
+
+# Nginx and KeepAlive installation
+
+Although not relevant to this script, I am currently using two proxy (proxy01 and proxy02) servers, both running as containers on separate Proxmox hosts in a cluster.
+Container configuration is using the Debian_Bookworm_amd64_20230626_cloud_rootfs.tar.xz template / 2GB Disk (local_sda) / 1 CPU / 512 MB RAM
+
+1. Nginx
+    1. Install Nginx
+        ```
+        sudo apt install nginx -y
+        ```
+
+    2. Check Nginx is running
+        ```
+        sudo systemctl status nginx
+        ```
+
+    3. Make sure you can see the default page via IPv4 and IPv6 if appropriate  
+        [http://192.168.1.10](http://192.168.1.10) (substitute for your IPv4 IP)  
+        [http://192.168.1.20](http://192.168.1.20) (substitute for your IPv4 IP)  
+        [http://[2a01:4b00::10]/](http://[2a01:4b00::10]/) (substitute for your IPv6 IP)  
+        [http://[2a01:4b00::20]/](http://[2a01:4b00::20]/) (substitute for your IPv6 IP)  
+
+    4. On each server, edit the main index page with the server it is (primary/secondary1/secondary2/etc)
+        ```
+        sudo nano /var/www/html/index.html
+        ```
+        Add in one of:
+            ```
+            <h1>PRIMARY1</h1>
+            <h1>SECONDARY2</h1>
+            <h1>SECONDARY3</h1>
+            ```
+2. KeepAlived
+    1. Install keepalived
+        ```
+        sudo apt install keepalived -y
+        ```
+    2. Choose an IP address that can be used as a virtual IP between the hosts  
+       192.168.1.30  
+       2a01:4b00::30  
+    3. Configure keepalived on each server
+        ```
+        sudo nano /etc/keepalived/keepalived.conf
+        ```
+       Declare the global defs and vrrp monitoring script
+        ```
+        global_defs {
+          # Keepalived process identifier
+          router_id nginx
+        }
+        # Script used to check if Nginx is running
+        vrrp_script check_nginx {
+          script "/bin/check_nginx.sh"
+          interval 2
+          weight 50
+        }
+        ```
+        Create a group for the interfaces
+        ```
+        #Virtual Interface Group
+        vrrp_sync_groupVI_01 {
+          group {
+            VI_01_4
+            VI_01_6
+          }
+        }
+        ```
+        Create the virtual intefaces
+        Notes:
+        * eth0 is my physical interface, change yours to suite
+        * Set state to MASTER or BACKUP
+        * Set priority (MASTER=120, BACKUP=110, BACKUP=100)
+  
+        For IPv4
+        ```
+        # Virtual interface
+        # The priority specifies the order in which the assigned interface to take over in a failover
+        vrrp_instance VI_01_4 {
+          state MASTER
+          interface eth0
+          virtual_router_id 51
+          priority 120
+          # The virtual ip address shared between the two loadbalancers
+          virtual_ipaddress {
+            192.168.1.30
+          }
+          track_script {
+            check_nginx
+          }
+          authentication {
+            auth_type AH
+            auth_pass secret
+          }
+        }
+        ```
+        For IPv6
+        ```
+        vrrp_instance VI_01_6 {
+          state MASTER
+          interface eth0
+          virtual_router_id 51
+          priority 120
+          # The virtual ip address shared between the two loadbalancers
+          virtual_ipaddress {
+            2a01:4b00::30/64
+          }
+          track_script {
+            check_nginx
+          }
+          authentication {
+            auth_type AH
+            auth_pass secret
+          }
+        }
+        ```
+    4. Create a script that'll be used to check nginx is running
+        ```
+        sudo nano /bin/check_nginx.sh
+        ```
+        Add in
+        ```
+        #!/bin/sh
+        if [ -z "`/bin/pidof nginx`" ]; then
+          exit 1
+        fi
+        ```
+        make the script executable
+        ```
+        sudo chmod 755 /bin/check_nginx.sh
+        ```
+
+    5. Check if KeepAliveD is started, if not, start it
+        ```
+        sudo systemctl status keepalived
+        sudo systemctl start keepalived
+        ```
+    6. Check the event log
+        ```
+        sudo tail -f /var/log/syslog
+        ```
+        if the following is received
+        ```
+        Keepalived_vrrp[4040]: SECURITY VIOLATION - scripts are being executed but script_security not enabled
+        ```
+        add the keepalived_script user to the 'users' group
+        ```
+        sudo useradd -g users -M keepalived_script
+        ```
 
 
 # Notes
