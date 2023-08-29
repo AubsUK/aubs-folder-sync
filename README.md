@@ -175,6 +175,8 @@ Configure root SSH Access from the primary server to all remote server(s)
 
 Following the Quick Start instructions and not modifying any variables, the following files are used:
 
+## On the primary server
+
 ### /usr/local/sbin/aubs-folder-sync/
 
 <table>
@@ -195,15 +197,6 @@ Following the Quick Start instructions and not modifying any variables, the foll
 <td>aubs-folder-sync.tmp.running</td>
 <td>Contains a count of the number of runs required, so the script knows if it needs to re-run</td>
 </tr>
-</table>
-
-
-### /var/log/
-<table>
-<tr><th>File Name</th><th>Purpose</th></tr>
-<td>aubs-folder-sync.log</td>
-<td>Stores the logs from each run</td>
-</tr>
 <tr>
 <td>
 .git/ (folder and all sub files)
@@ -213,6 +206,42 @@ images/ (folder and all sub files)
 LICENSE<br>README.md<br>
 </td>
 <td>Git files, not used by the script</td>
+</tr>
+
+</table>
+
+
+### /var/log/
+<table>
+<tr><th>File Name</th><th>Purpose</th></tr>
+<td>aubs-folder-sync.log</td>
+<td>Stores the logs from each run</td>
+</tr>
+</table>
+
+## On the remote server(s)
+
+### /home/aubs-folder-sync/
+
+<table>
+<tr><th>File Name</th><th>Purpose</th></tr>
+<tr>
+<td>various</td>
+<td>Various files created for a standard user</td>
+</tr>
+<tr>
+<td>.ssh/authorized_key</td>
+<td>The service file</td>
+</tr>
+</table>
+
+### /etc/sudoers.d/
+
+<table>
+<tr><th>File Name</th><th>Purpose</th></tr>
+<tr>
+<td>aubs-folder-sync</td>
+<td>List of packages the account can run as sudo, but without having to enter a password</td>
 </tr>
 </table>
 
