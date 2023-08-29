@@ -646,6 +646,7 @@ Aug 29 05:06:23 proxy01 aubs-folder-sync.sh[126117]: total size is 25,556  speed
 <br/><br/>
 
 # Removal
+|[Back to top](#aubs-folder-sync)|<br/><br/>
 If you installed the script using the prerequisites and quick start guide, it's pretty easy to remove.
 
 1. Stop the service and disable it (this will remove the symbolic link)
