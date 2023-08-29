@@ -32,7 +32,7 @@ It was born primarily through the need for a mechanism to synchronise configurat
 # Prerequisites
 |[Back to top](#aubs-folder-sync)|<br/><br/>
 There are a few prerequisites, but they should be relatively simple.
-* First: on all remote server(s), create a service account, give it sudo access, limit passwordless sudo to specific commands, allow it to log in via password.
+* First: on all remote server(s), create service account, give sudo access, limit passwordless sudo to specific commands, allow it to log in via password.
 * Second: on the primary server, pass its root account public key to each of the remote server(s).
 * Third: on the primary server, install rsync.
 * Fourth: on all remote server(s) remove the service account ability to log in with a password and lock the password.
@@ -493,7 +493,8 @@ No testing elements yet
 5. Email notification
 6. Testing options
 7. Running on multiple servers to sync between each other both ways (notes --delete would need to be removed because on startup could delete on remote before remote retries)
-8. 
+8. Restrict what the remote server account can and can't do
+9. 
 
 <br/><br/>
 
