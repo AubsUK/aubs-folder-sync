@@ -34,7 +34,7 @@ It was born primarily through the need for a mechanism to synchronise configurat
 There are a few prerequisites, but they should be relatively simple.
 * First: on all remote server(s), create service account, give sudo access, limit passwordless sudo to specific commands, allow it to log in via password.
 * Second: on the primary server, pass its root account public key to each of the remote server(s).
-* Third: on the primary server, install rsync.
+* Third: on the primary server, install rsync and git.
 * Fourth: on all remote server(s) remove the service account ability to log in with a password and lock the password.
 * Fifth: on all remote server(s) install rsync.
 
@@ -110,9 +110,10 @@ Configure root SSH Access from the primary server to all remote server(s)
     exit
     ```
 6. Repeat steps 1-5 on the primary server for each of the 'remote' servers (Note: Step 2 should only ever need to be done once, if it doesn't already exist).
-7. Install rsync
+7. Install rsync and git
     ```
-    sudo apt install rsync
+    sudo apt update
+    sudo apt install rsync git
     ```
 
 ## On the remote server(s)
