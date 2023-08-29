@@ -171,9 +171,19 @@ Configure root SSH Access from the primary server to all remote server(s)
     sudo ln -s /usr/local/sbin/aubs-folder-sync/aubs-folder-sync.service /etc/systemd/system/aubs-folder-sync.service
     sudo systemctl enable aubs-folder-sync.service
     sudo systemctl start aubs-folder-sync.service
-    systemctl status aubs-folder-sync.service
+    sudo systemctl status aubs-folder-sync.service
     ```
     NOTE: If the service is ever disabled, the symbolic link wil need to be re-created, so run the 4 lines of code again
+6.	Testing  
+    Edit, create and delete a file on the Primary server, while watching the journal and log file:
+    1. Follow the journal (because rsync has -v, it'll show in the journal)
+        ```
+        sudo journalctl -f -u aubs-folder-sync.service
+        ```
+    2. Follow the log file
+        ```
+        sudo follow -f /var/log/aubs-folder-sync
+        ```
 
 
 <br/><br/>
