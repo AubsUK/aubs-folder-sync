@@ -496,7 +496,17 @@ No testing elements yet
 # Example outputs
 |[Back to top](#aubs-folder-sync)|<br/><br/>
 <br/>
-No example outputs yet
+
+## Log file output on start
+
+
+## Successful log file output on file change (create)
+
+
+## Successful log file output on multiple file change (quick succession)
+
+
+## Successful log file output on multiple file change (multiple)
 
 
 <br/><br/>
