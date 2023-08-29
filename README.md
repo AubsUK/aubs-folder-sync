@@ -147,24 +147,26 @@ Configure root SSH Access from the primary server to all remote server(s)
 
 # Quick Start
 |[Back to top](#aubs-folder-sync)|<br/><br/>
-1. Change directory to a secure location to hold the script
+1. Make sure all the prerequisites are set up.
+
+2. Change directory to a secure location to hold the script
     ```
     cd /usr/local/sbin/
     ```
 
-2. Clone the repository as root so permissions are set appropriately
+3. Clone the repository as root so permissions are set appropriately
     ```
     sudo git clone https://github.com/AubsUK/aubs-folder-sync
     ```
     or just create the folder and two files manually, and copy their contents
 
-3. Make the script executable
+4. Make the script executable
     ```
     cd aubs-folder-sync
     sudo chmod 700 aubs-folder-sync.sh
     ```
 
-4. Create a symbolic link for the service file; enable then start the service
+5. Create a symbolic link for the service file; enable then start the service
     ```
     sudo ln -s /usr/local/sbin/aubs-folder-sync/aubs-folder-sync.service /etc/systemd/system/aubs-folder-sync.service
     sudo systemctl enable aubs-folder-sync.service
