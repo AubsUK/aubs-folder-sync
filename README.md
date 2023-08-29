@@ -530,16 +530,118 @@ No testing elements yet
 <br/>
 
 ## Log file output on start
+```
+Tue Aug 29 04:52:12 AM UTC 2023: ==================================================
+Tue Aug 29 04:52:12 AM UTC 2023: ================= Service Started ================
+Tue Aug 29 04:52:12 AM UTC 2023: All folders checked ok.
+Tue Aug 29 04:52:12 AM UTC 2023: Starting First Run
+Tue Aug 29 04:52:12 AM UTC 2023: --------------------------------------------------
+Tue Aug 29 04:52:12 AM UTC 2023: Sync Folders: '/etc/nginx/'
+Tue Aug 29 04:52:12 AM UTC 2023: Refresh Servers: '192.168.1.233'
+Tue Aug 29 04:52:12 AM UTC 2023: Remote Commands: 'sudo service nginx restart'
+Tue Aug 29 04:52:12 AM UTC 2023: Remote User: 'aubs-folder-sync'
+Tue Aug 29 04:52:12 AM UTC 2023: Reason: (1) - 1 First Run validating sync
+Tue Aug 29 04:52:12 AM UTC 2023: Synchronising to 192.168.1.233
+Tue Aug 29 04:52:13 AM UTC 2023: Sync success.
+Tue Aug 29 04:52:13 AM UTC 2023: Running commands on server 192.168.1.233
+Tue Aug 29 04:52:14 AM UTC 2023: Commands completed.
+Tue Aug 29 04:52:14 AM UTC 2023: Done
+Tue Aug 29 04:52:14 AM UTC 2023: Synchronise complete.
+```
+```
+Aug 29 04:52:12 proxy01 systemd[1]: Started aubs-folder-sync.service - aubs-folder-sync.
+Aug 29 04:52:13 proxy01 aubs-folder-sync.sh[125056]: sending incremental file list
+Aug 29 04:52:13 proxy01 aubs-folder-sync.sh[125056]: /etc/
+Aug 29 04:52:13 proxy01 aubs-folder-sync.sh[125056]: sent 1,169 bytes  received 29 bytes  798.67 bytes/sec
+Aug 29 04:52:13 proxy01 aubs-folder-sync.sh[125056]: total size is 25,556  speedup is 21.33
+```
 
+## Successful log file output on multiple file changes (Multiple CREATE in quick succession)
+```
+Tue Aug 29 05:05:37 AM UTC 2023: --------------------------------------------------
+Tue Aug 29 05:05:37 AM UTC 2023: Sync Folders: '/etc/nginx/'
+Tue Aug 29 05:05:37 AM UTC 2023: Refresh Servers: '192.168.1.233'
+Tue Aug 29 05:05:37 AM UTC 2023: Remote Commands: 'sudo service nginx restart'
+Tue Aug 29 05:05:37 AM UTC 2023: Remote User: 'aubs-folder-sync'
+Tue Aug 29 05:05:37 AM UTC 2023: Reason: (2) - 1 CREATE /etc/nginx/TEST-FILE01 2 CREATE /etc/nginx/TEST-FILE02
+Tue Aug 29 05:05:37 AM UTC 2023: Synchronising to 192.168.1.233
+Tue Aug 29 05:05:38 AM UTC 2023: Sync success.
+Tue Aug 29 05:05:38 AM UTC 2023: Running commands on server 192.168.1.233
+Tue Aug 29 05:05:39 AM UTC 2023: Commands completed.
+Tue Aug 29 05:05:39 AM UTC 2023: Done
+Tue Aug 29 05:05:39 AM UTC 2023: Synchronise complete.
+```
+```
+Aug 29 05:05:38 proxy01 aubs-folder-sync.sh[125914]: sending incremental file list
+Aug 29 05:05:38 proxy01 aubs-folder-sync.sh[125914]: /etc/nginx/
+Aug 29 05:05:38 proxy01 aubs-folder-sync.sh[125914]: /etc/nginx/TEST-FILE01
+Aug 29 05:05:38 proxy01 aubs-folder-sync.sh[125914]: /etc/nginx/TEST-FILE02
+Aug 29 05:05:38 proxy01 aubs-folder-sync.sh[125914]: sent 1,289 bytes  received 71 bytes  906.67 bytes/sec
+Aug 29 05:05:38 proxy01 aubs-folder-sync.sh[125914]: total size is 25,556  speedup is 18.79
+```
 
-## Successful log file output on file change (create)
+## Successful log file output on file change (MODIFY)
+```
+Tue Aug 29 05:06:00 AM UTC 2023: --------------------------------------------------
+Tue Aug 29 05:06:00 AM UTC 2023: Sync Folders: '/etc/nginx/'
+Tue Aug 29 05:06:00 AM UTC 2023: Refresh Servers: '192.168.1.233'
+Tue Aug 29 05:06:00 AM UTC 2023: Remote Commands: 'sudo service nginx restart'
+Tue Aug 29 05:06:00 AM UTC 2023: Remote User: 'aubs-folder-sync'
+Tue Aug 29 05:06:00 AM UTC 2023: Reason: (1) - 1 MODIFY /etc/nginx/TEST-FILE01
+Tue Aug 29 05:06:00 AM UTC 2023: Synchronising to 192.168.1.233
+Tue Aug 29 05:06:01 AM UTC 2023: Sync success.
+Tue Aug 29 05:06:01 AM UTC 2023: Running commands on server 192.168.1.233
+Tue Aug 29 05:06:02 AM UTC 2023: Commands completed.
+Tue Aug 29 05:06:02 AM UTC 2023: Done
+Tue Aug 29 05:06:02 AM UTC 2023: Synchronise complete.
+```
+```
+Aug 29 05:06:01 proxy01 aubs-folder-sync.sh[125977]: sending incremental file list
+Aug 29 05:06:01 proxy01 aubs-folder-sync.sh[125977]: /etc/nginx/TEST-FILE01
+Aug 29 05:06:01 proxy01 aubs-folder-sync.sh[125977]: sent 1,318 bytes  received 68 bytes  924.00 bytes/sec
+Aug 29 05:06:01 proxy01 aubs-folder-sync.sh[125977]: total size is 25,568  speedup is 18.45
+```
 
-
-## Successful log file output on multiple file change (quick succession)
-
-
-## Successful log file output on multiple file change (multiple)
-
+## Successful log file output on multiple file change (multiple DELETE in slow succession)
+```
+Tue Aug 29 05:06:21 AM UTC 2023: --------------------------------------------------
+Tue Aug 29 05:06:21 AM UTC 2023: Sync Folders: '/etc/nginx/'
+Tue Aug 29 05:06:21 AM UTC 2023: Refresh Servers: '192.168.1.233'
+Tue Aug 29 05:06:21 AM UTC 2023: Remote Commands: 'sudo service nginx restart'
+Tue Aug 29 05:06:21 AM UTC 2023: Remote User: 'aubs-folder-sync'
+Tue Aug 29 05:06:21 AM UTC 2023: Reason: (1) - 1 DELETE /etc/nginx/TEST-FILE01
+Tue Aug 29 05:06:21 AM UTC 2023: Synchronising to 192.168.1.233
+Tue Aug 29 05:06:22 AM UTC 2023: Sync success.
+Tue Aug 29 05:06:22 AM UTC 2023: Running commands on server 192.168.1.233
+Tue Aug 29 05:06:22 AM UTC 2023: Commands completed.
+Tue Aug 29 05:06:22 AM UTC 2023: Done
+Tue Aug 29 05:06:22 AM UTC 2023: Synchronise complete.
+Tue Aug 29 05:06:22 AM UTC 2023: --------------------------------------------------
+Tue Aug 29 05:06:22 AM UTC 2023: Sync Folders: '/etc/nginx/'
+Tue Aug 29 05:06:22 AM UTC 2023: Refresh Servers: '192.168.1.233'
+Tue Aug 29 05:06:22 AM UTC 2023: Remote Commands: 'sudo service nginx restart'
+Tue Aug 29 05:06:22 AM UTC 2023: Remote User: 'aubs-folder-sync'
+Tue Aug 29 05:06:22 AM UTC 2023: Reason: (1) - 1 DELETE /etc/nginx/TEST-FILE02
+Tue Aug 29 05:06:22 AM UTC 2023: Synchronising to 192.168.1.233
+Tue Aug 29 05:06:23 AM UTC 2023: Sync success.
+Tue Aug 29 05:06:23 AM UTC 2023: Running commands on server 192.168.1.233
+Tue Aug 29 05:06:24 AM UTC 2023: Commands completed.
+Tue Aug 29 05:06:24 AM UTC 2023: Done
+Tue Aug 29 05:06:24 AM UTC 2023: Synchronise complete.
+```
+```
+Aug 29 05:06:03 proxy01 aubs-folder-sync.sh[126020]: total size is 25,568  speedup is 20.62
+Aug 29 05:06:22 proxy01 aubs-folder-sync.sh[126076]: sending incremental file list
+Aug 29 05:06:22 proxy01 aubs-folder-sync.sh[126076]: deleting etc/nginx/TEST-FILE01
+Aug 29 05:06:22 proxy01 aubs-folder-sync.sh[126076]: /etc/nginx/
+Aug 29 05:06:22 proxy01 aubs-folder-sync.sh[126076]: sent 1,199 bytes  received 54 bytes  835.33 bytes/sec
+Aug 29 05:06:22 proxy01 aubs-folder-sync.sh[126076]: total size is 25,562  speedup is 20.40
+Aug 29 05:06:23 proxy01 aubs-folder-sync.sh[126117]: sending incremental file list
+Aug 29 05:06:23 proxy01 aubs-folder-sync.sh[126117]: deleting etc/nginx/TEST-FILE02
+Aug 29 05:06:23 proxy01 aubs-folder-sync.sh[126117]: /etc/nginx/
+Aug 29 05:06:23 proxy01 aubs-folder-sync.sh[126117]: sent 1,169 bytes  received 54 bytes  815.33 bytes/sec
+Aug 29 05:06:23 proxy01 aubs-folder-sync.sh[126117]: total size is 25,556  speedup is 20.90
+```
 
 <br/><br/>
 
