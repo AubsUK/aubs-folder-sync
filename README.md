@@ -159,7 +159,7 @@ Configure root SSH Access from the primary server to all remote server(s)
     ```
     sudo git clone https://github.com/AubsUK/aubs-folder-sync
     ```
-    or just create the folder and two files manually, and copy their contents
+    or just create the folder and two files manually, then copy their contents
 
 4. Make the script executable
     ```
@@ -183,7 +183,7 @@ Configure root SSH Access from the primary server to all remote server(s)
         ```
     2. Follow the log file
         ```
-        sudo follow -f /var/log/aubs-folder-sync
+        sudo follow -f /var/log/aubs-folder-sync.log
         ```
     3. On the remote server(s) watch one folder being sync'd
        ```
