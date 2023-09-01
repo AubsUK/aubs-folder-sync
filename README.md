@@ -264,7 +264,7 @@ LICENSE<br>README.md<br>
 </tr>
 <tr>
 <td>.ssh/authorized_key</td>
-<td>The service file</td>
+<td>Contains the authorised key for root from the primary server</td>
 </tr>
 </table>
 
