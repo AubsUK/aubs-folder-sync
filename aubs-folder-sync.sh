@@ -16,6 +16,9 @@
 ##
 ## Changes
 ## v0.0.1 - 2023-08-29 - Initial Release
+## v0.0.2 - 2025-12-16 - Spelling correction
+##                     - Changed REMOTE_COMMANDS:
+##                       == From `sudo service nginx restart` to `sudo systemctl reload nginx`
 ##
 ##
 ##
@@ -29,8 +32,8 @@ FOLDERS_TO_SYNC=("/etc/nginx/") # Other folders can be added in the format ("/pa
 FILES_TO_IGNORE_REGEX=".*\.swp"  # Files can be excluded using regex format e.g. ".*\.swp|.*\.tmp"
 SERVERS_TO_REFRESH=("192.168.1.233") # List of servers (IP/hostname) to synchronise from this server
 REMOTE_PORT="22122" # Specify the SSH port to be used for the remote servers
-REMOTE_USER="aubs-folder-sync" # Speficy the user that will be used for the SSH connections
-REMOTE_COMMANDS="sudo service nginx restart" # Commands to run on the remote servers after synchronising
+REMOTE_USER="aubs-folder-sync" # Specify the user that will be used for the SSH connections
+REMOTE_COMMANDS="sudo systemctl reload nginx" # Commands to run on the remote servers after synchronising
 LOGFILE_LOCATION="/var/log/aubs-folder-sync.log" # Full pat for the log file
 
 #####################################################
