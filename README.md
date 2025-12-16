@@ -57,7 +57,7 @@ There are a few prerequisites, but they should be relatively simple.
     Add in
     ```
     aubs-folder-sync ALL=NOPASSWD:/usr/bin/rsync<br>
-    aubs-folder-sync ALL=NOPASSWD:/usr/sbin/service
+    aubs-folder-sync ALL=NOPASSWD:/usr/bin/systemctl reload nginx
     ````
 4. Reload sudo config
     ```
