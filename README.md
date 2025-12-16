@@ -76,7 +76,7 @@ There are a few prerequisites, but they should be relatively simple.
     ```
 6. Restart SSH service
     ```
-    sudo service ssh restart
+    sudo systemctl restart ssh
     ```
 7. Repeat all the steps in items 1-6 on each of the 'remote' servers.
 
@@ -129,7 +129,7 @@ Configure root SSH Access from the primary server to all remote server(s)
     ```
 2. Restart SSH service
     ```
-    sudo service ssh restart
+    sudo systemctl restart ssh
     ```
 3.	Remove password for aubs-folder-sync (lock prevents it from being used, delete leaves the account with no password and it could still log in)
     ```
@@ -367,7 +367,7 @@ Speficy the user that will be used for the SSH connections
 Commands to run on the remote servers after synchronising
 </td>
 <td>
-"service nginx restart"
+"systemctl reload nginx"
 </td>
 </tr>
 <tr>
@@ -539,7 +539,7 @@ Tue Aug 29 04:52:12 AM UTC 2023: Starting First Run
 Tue Aug 29 04:52:12 AM UTC 2023: --------------------------------------------------
 Tue Aug 29 04:52:12 AM UTC 2023: Sync Folders: '/etc/nginx/'
 Tue Aug 29 04:52:12 AM UTC 2023: Refresh Servers: '192.168.1.20'
-Tue Aug 29 04:52:12 AM UTC 2023: Remote Commands: 'sudo service nginx restart'
+Tue Aug 29 04:52:12 AM UTC 2023: Remote Commands: 'sudo systemctl reload nginx'
 Tue Aug 29 04:52:12 AM UTC 2023: Remote User: 'aubs-folder-sync'
 Tue Aug 29 04:52:12 AM UTC 2023: Reason: (1) - 1 First Run validating sync
 Tue Aug 29 04:52:12 AM UTC 2023: Synchronising to 192.168.1.20
@@ -562,7 +562,7 @@ Aug 29 04:52:13 proxy01 aubs-folder-sync.sh[125056]: total size is 25,556  speed
 Tue Aug 29 05:05:37 AM UTC 2023: --------------------------------------------------
 Tue Aug 29 05:05:37 AM UTC 2023: Sync Folders: '/etc/nginx/'
 Tue Aug 29 05:05:37 AM UTC 2023: Refresh Servers: '192.168.1.20'
-Tue Aug 29 05:05:37 AM UTC 2023: Remote Commands: 'sudo service nginx restart'
+Tue Aug 29 05:05:37 AM UTC 2023: Remote Commands: 'sudo systemctl reload nginx'
 Tue Aug 29 05:05:37 AM UTC 2023: Remote User: 'aubs-folder-sync'
 Tue Aug 29 05:05:37 AM UTC 2023: Reason: (2) - 1 CREATE /etc/nginx/TEST-FILE01 2 CREATE /etc/nginx/TEST-FILE02
 Tue Aug 29 05:05:37 AM UTC 2023: Synchronising to 192.168.1.20
@@ -586,7 +586,7 @@ Aug 29 05:05:38 proxy01 aubs-folder-sync.sh[125914]: total size is 25,556  speed
 Tue Aug 29 05:06:00 AM UTC 2023: --------------------------------------------------
 Tue Aug 29 05:06:00 AM UTC 2023: Sync Folders: '/etc/nginx/'
 Tue Aug 29 05:06:00 AM UTC 2023: Refresh Servers: '192.168.1.20'
-Tue Aug 29 05:06:00 AM UTC 2023: Remote Commands: 'sudo service nginx restart'
+Tue Aug 29 05:06:00 AM UTC 2023: Remote Commands: 'sudo systemctl reload nginx'
 Tue Aug 29 05:06:00 AM UTC 2023: Remote User: 'aubs-folder-sync'
 Tue Aug 29 05:06:00 AM UTC 2023: Reason: (1) - 1 MODIFY /etc/nginx/TEST-FILE01
 Tue Aug 29 05:06:00 AM UTC 2023: Synchronising to 192.168.1.20
@@ -608,7 +608,7 @@ Aug 29 05:06:01 proxy01 aubs-folder-sync.sh[125977]: total size is 25,568  speed
 Tue Aug 29 05:06:21 AM UTC 2023: --------------------------------------------------
 Tue Aug 29 05:06:21 AM UTC 2023: Sync Folders: '/etc/nginx/'
 Tue Aug 29 05:06:21 AM UTC 2023: Refresh Servers: '192.168.1.20'
-Tue Aug 29 05:06:21 AM UTC 2023: Remote Commands: 'sudo service nginx restart'
+Tue Aug 29 05:06:21 AM UTC 2023: Remote Commands: 'sudo systemctl reload nginx'
 Tue Aug 29 05:06:21 AM UTC 2023: Remote User: 'aubs-folder-sync'
 Tue Aug 29 05:06:21 AM UTC 2023: Reason: (1) - 1 DELETE /etc/nginx/TEST-FILE01
 Tue Aug 29 05:06:21 AM UTC 2023: Synchronising to 192.168.1.20
@@ -620,7 +620,7 @@ Tue Aug 29 05:06:22 AM UTC 2023: Synchronise complete.
 Tue Aug 29 05:06:22 AM UTC 2023: --------------------------------------------------
 Tue Aug 29 05:06:22 AM UTC 2023: Sync Folders: '/etc/nginx/'
 Tue Aug 29 05:06:22 AM UTC 2023: Refresh Servers: '192.168.1.20'
-Tue Aug 29 05:06:22 AM UTC 2023: Remote Commands: 'sudo service nginx restart'
+Tue Aug 29 05:06:22 AM UTC 2023: Remote Commands: 'sudo systemctl reload nginx'
 Tue Aug 29 05:06:22 AM UTC 2023: Remote User: 'aubs-folder-sync'
 Tue Aug 29 05:06:22 AM UTC 2023: Reason: (1) - 1 DELETE /etc/nginx/TEST-FILE02
 Tue Aug 29 05:06:22 AM UTC 2023: Synchronising to 192.168.1.20
@@ -774,7 +774,7 @@ Container configuration is using the Debian_Bookworm_amd64_20230626_cloud_rootfs
             check_nginx
           }
           authentication {
-            auth_type AH
+            auth_type PASS
             auth_pass secret
           }
         }
@@ -794,7 +794,7 @@ Container configuration is using the Debian_Bookworm_amd64_20230626_cloud_rootfs
             check_nginx
           }
           authentication {
-            auth_type AH
+            auth_type PASS
             auth_pass secret
           }
         }
