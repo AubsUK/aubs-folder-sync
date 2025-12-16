@@ -731,6 +731,8 @@ Container configuration is using the Debian_Bookworm_amd64_20230626_cloud_rootfs
         global_defs {
           # Keepalived process identifier
           router_id nginx
+          enable_script_security
+          script_user keepalived_script
         }
         # Script used to check if Nginx is running
         vrrp_script check_nginx {
