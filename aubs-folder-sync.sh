@@ -10,7 +10,7 @@
 ##########################################################################################################
 ##########################################################################################################
 ##
-## aubs-folder-sync v0.0.2
+## aubs-folder-sync v0.0.3
 ## https://github.com/AubsUK/aubs-folder-sync
 ## _________________________________________
 ##
@@ -19,6 +19,10 @@
 ## v0.0.2 - 2025-12-16 - Spelling correction
 ##                     - Changed REMOTE_COMMANDS:
 ##                       == From `sudo service nginx restart` to `sudo systemctl reload nginx`
+## v0.0.3 - 2026-02-05 - When multiple changes occur, instead of spawning mass updates,
+##                         process them one-by-one instead of in the background (removed "&").
+##                         Asynchronous background processing to synchronous sequential processing.
+##                     - Added restart to command if reload fails.
 ##
 ##
 ##
@@ -30,10 +34,10 @@
 
 FOLDERS_TO_SYNC=("/etc/nginx/") # Other folders can be added in the format ("/path/to/" "/another/path/")
 FILES_TO_IGNORE_REGEX=".*\.swp"  # Files can be excluded using regex format e.g. ".*\.swp|.*\.tmp"
-SERVERS_TO_REFRESH=("192.168.1.233") # List of servers (IP/hostname) to synchronise from this server
+SERVERS_TO_REFRESH=("10.1.3.52") # List of servers (IP/hostname) to synchronise from this server
 REMOTE_PORT="22122" # Specify the SSH port to be used for the remote servers
 REMOTE_USER="aubs-folder-sync" # Specify the user that will be used for the SSH connections
-REMOTE_COMMANDS="sudo systemctl reload nginx" # Commands to run on the remote servers after synchronising
+REMOTE_COMMANDS="sudo systemctl reload nginx || sudo systemctl restart nginx" # Commands to run on the remote servers after synchronising
 LOGFILE_LOCATION="/var/log/aubs-folder-sync.log" # Full pat for the log file
 
 #####################################################
@@ -153,5 +157,5 @@ SyncFolder "" "" "First Run validating sync"
 ## use inotifywait to monitor changes and call the SyncFolder function when detected
 inotifywait --exclude "$FILES_TO_IGNORE_REGEX" -q -m -r -e modify,delete,delete_self,create,move,move_self "${FOLDERS_TO_SYNC[@]}" | while read DIRECTORY EVENT FILE; do
 	## Call the function asynchronously
-	SyncFolder "$DIRECTORY" "$FILE" "$EVENT" &
+	SyncFolder "$DIRECTORY" "$FILE" "$EVENT"
 done
