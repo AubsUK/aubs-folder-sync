@@ -58,6 +58,7 @@ There are a few prerequisites, but they should be relatively simple.
     ```
     aubs-folder-sync ALL=NOPASSWD:/usr/bin/rsync<br>
     aubs-folder-sync ALL=NOPASSWD:/usr/bin/systemctl reload nginx
+    aubs-folder-sync ALL=NOPASSWD:/usr/bin/systemctl restart nginx
     ````
 4. Reload sudo config
     ```
@@ -744,7 +745,7 @@ Container configuration is using the Debian_Bookworm_amd64_20230626_cloud_rootfs
         Create a group for the interfaces
         ```
         #Virtual Interface Group
-        vrrp_sync_groupVI_01 {
+        vrrp_sync_group VI_01 {
           group {
             VI_01_4
             VI_01_6
