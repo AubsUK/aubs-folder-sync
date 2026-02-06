@@ -38,7 +38,7 @@ SERVERS_TO_REFRESH=("10.1.3.52") # List of servers (IP/hostname) to synchronise 
 REMOTE_PORT="22122" # Specify the SSH port to be used for the remote servers
 REMOTE_USER="aubs-folder-sync" # Specify the user that will be used for the SSH connections
 REMOTE_COMMANDS="sudo systemctl reload nginx || sudo systemctl restart nginx" # Commands to run on the remote servers after synchronising
-LOGFILE_LOCATION="/var/log/aubs-folder-sync.log" # Full pat for the log file
+LOGFILE_LOCATION="/var/log/aubs-folder-sync.log" # Full path for the log file
 
 #####################################################
 ################ DO NOT CHANGE BELOW ################
